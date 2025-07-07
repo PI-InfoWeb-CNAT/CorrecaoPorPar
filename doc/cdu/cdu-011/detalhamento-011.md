@@ -22,12 +22,12 @@
 ## Fluxo Alternativo I - Avaliador não informa a nota
 | Ações do ator | Ações do sistema |
 | :-----------: |:---------------: | 
-|  | 4.1 - Sistema informa que a nota é inválida e exibe novamente a tela de submissão de correção |
+|  | 4.1 - Sistema informa que a nota é inválida e exibe novamente a tela de submissão de correção (retorna ao passo 2 do fluxo principal) |
 
 ## Fluxo Alternativo II - Avaliador informa nota negativa ou maior que 100
 | Ações do ator | Ações do sistema |
 | :-----------: | :--------------: | 
-| | 4.2 - Sistema informa que a nota precisar estar entre 0 e 100 e exibe novamente a tela de submissão de correção |  
+| | 4.2 - Sistema informa que a nota precisar estar entre 0 e 100 e exibe novamente a tela de submissão de correção (retorna ao passo 2 do fluxo principal) |  
 
 ## Diagrama de Interação (Sequência)
 
@@ -37,11 +37,11 @@
 
 ### Sequência - Etapa 1
 
-Em construção...
+![Etapa 1 do diagrama de sequência](./etapa%201.png)
 
 ### Sequência - Etapa 2
 
-Em construção...
+![Etapa 2 do diagra de sequência](./etapa%202.png)
 
 ## Diagrama de Classes de Projeto
 
