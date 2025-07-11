@@ -2,10 +2,10 @@
 
 - **Ator principal**: Aluno (avaliador)
 - **Atores secundários**: (nenhum)
-- **Resumo**: Um aluno recebe a incumbência de avaliar o diagrama de um colega, para o qual irá atribuir uma nota e um comentário (opcional).
+- **Resumo**: Na página de uma avaiação específica, o aluno (logado) clica no link que solicitou que ele avaliasse o diagrama de um colega. É apresentada a resposta do colega e um formulário para atribuir uma nota e um comentário (opcional).
 - **Pré-condição**: 
   - aluno (avaliador) logado no sistema;
-  - trabalho enviado corretamente na janela de submissão;
+  - trabalhos enviados corretamente na janela de submissão;
   - jenala de correção aberta pelo professor.
 - **Pós-Condição**: 
   - correção do trabalho submetida e persitida. 
@@ -16,8 +16,8 @@
 | 0 - Aluno é convidado a avaliar o trabalho de um colega e clicar em um link | |  
 | 1 - Aluno clica no link para avaliar trabalho |  |
 |  | 2 - Sistema exibe o diagrama a ser avaliado e um formulário contendo nota e comentário |
-| 3 - Avaliador preenche o formulário e envia a avaliação |  |
-|  | 4 - Sistema informa que a avaliação foi registrada com sucesso ao retornar para a página inicial da avaliação |
+| 3 - Avaliador preenche o formulário e submete a avaliação |  |
+|  | 4 - Sistema informa que a avaliação foi regispersistida com sucesso ao retornar para a página da avaliação específica |
 
 ## Fluxo Alternativo I - Avaliador não informa a nota
 | Ações do ator | Ações do sistema |
@@ -33,15 +33,15 @@
 
 ### DSS
 
-![Diagrama de Sequência do Sistema](./DSS.png)
+![Diagrama de Sequência do Sistema](./imagens/DSS.png)
 
 ### Sequência - Etapa 1
 
-![Etapa 1 do diagrama de sequência](./etapa%201.png)
+![Etapa 1 do diagrama de sequência](./imagens/etapa%201.png)
 
 ### Sequência - Etapa 2
 
-![Etapa 2 do diagrama de sequência](./etapa%202.png)
+![Etapa 2 do diagrama de sequência](./imagens/etapa%202.png)
 
 ## Diagrama de Classes de Projeto
 
