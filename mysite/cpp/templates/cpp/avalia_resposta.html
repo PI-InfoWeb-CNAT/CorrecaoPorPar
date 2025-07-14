@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>App CPP</title>
+    </head>
+    <body>
+        <h1>Aplicação CorreçãoPorPar</h1>
+        <h2>Realize a AVALIAÇÃO da Submissão Abaixo:</h2>
+        <p><u>Diagrama Submetido</u>:<br/>
+        <img src="{{ resposta.diagrama.url }}" 
+             alt="Diagrama a ser avaliado"></p>
+        <p><u>Observação</u>:<br/>
+        {{ resposta.observacao }}</p>
+        <hr/>
+        <h3>Registre a sua Avaliação:</h3>
+        <form method="post" 
+              action="{% url 'cpp:avaliacao' resposta.id %}">
+            {% csrf_token %}
+            <p>Nota: <input type="number" name="nota"></p>
+            <p>Comentário:
+                <textarea cols="60" name="comentario">Informe o que motivou a atribuição da nota informada.
+                </textarea>
+            </p>
+            <input type="submit" value="Salvar Avaliação">
+        </form>     
+    </body>
+</html>
