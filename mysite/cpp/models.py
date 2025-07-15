@@ -101,5 +101,5 @@ class Resposta(models.Model):
     )
     def __str__(self):
         return "Resposta ({})".format(self.id)
-    def set_correcao(self, correcao):
-        self.correcao = correcao
+    def set_correcao(self, obj_correcao):
+        self.correcao = obj_correcao
