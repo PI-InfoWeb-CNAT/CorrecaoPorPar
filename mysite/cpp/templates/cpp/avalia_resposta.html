@@ -4,21 +4,23 @@
     </head>
     <body>
         <h1>Aplicação CorreçãoPorPar</h1>
-        <h2>Realize a AVALIÇÃO da submissão abaixo:</h2>
-        <p><u>Diagrama submetido</u>:<br/>
+        <h2>Realize a AVALIAÇÃO da Submissão Abaixo:</h2>
+        <p><u>Diagrama Submetido</u>:<br/>
         <img src="{{ resposta.diagrama.url }}" 
-             alt="Diagrama a ser avaliado">
-        </p>
-        <p><u>Observação</u>: {{ resposta.observacao }}</p>
+             alt="Diagrama a ser avaliado"></p>
+        <p><u>Observação</u>:<br/>
+        {{ resposta.observacao }}</p>
         <hr/>
-        <h3>Resgistre a sua AVALIAÇÃO</h3>
-        <form method="post" action="{% url 'cpp:avaliar' resposta.id %}">
+        <h3>Registre a sua Avaliação:</h3>
+        <form method="post" 
+              action="{% url 'cpp:avaliacao' resposta.id %}">
             {% csrf_token %}
             <p>Nota: <input type="number" name="nota"></p>
-            <p>Comentários:<br/>
-            <textarea cols="60" name="comentarios">Justifique a nota atribuída.
-            </textarea></p>
-            <input type="submit" value="Salva Avaliação"/>
+            <p>Comentário:
+                <textarea cols="60" name="comentario">Justifique a nota atribuída.
+                </textarea>
+            </p>
+            <input type="submit" value="Salvar Avaliação">
         </form>
     </body>
 </html>
