@@ -17,6 +17,6 @@ urlpatterns = [
     ),
     path(
         '', # INICIALMENTE a página inicial será a listagem geral 
-        views.ListarCursosView.as_view(), name='lista-tudo'
+        views.ListarCursosView.as_view(), name='index'
     ),
 ]

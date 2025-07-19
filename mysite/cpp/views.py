@@ -1,11 +1,30 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib.auth.decorators import user_passes_test
+from django.utils.decorators import method_decorator
 from .services import ServicoResposta, ServicoCorrecao, ServicoTurma
 from .services import ServicoCurso, ServicoAvaliacao
 from .models import Avaliacao
 
+## Funções de Teste de Usuários
+###############################
+def eh_aluno(user):
+    if hasattr(user, 'aluno'):
+        return True
+    return False
+def eh_professor(user):
+    if hasattr(user, 'professor'):
+        return True
+    return False
+def eh_aluno_ou_professor(user):
+    if hasattr(user, 'aluno') or hasattr(user, 'professor'):
+        return True
+    return False
+
+
 ## Avalia Resposta View
 ###############################
+@method_decorator(user_passes_test(eh_aluno), name='dispatch')
 class AvaliaRespostaView(View):
     def get(self, request, *args, **kwargs):
         srv = ServicoResposta()
@@ -17,8 +36,8 @@ class AvaliaRespostaView(View):
     def post(self, request, *args, **kwargs):
         srv = ServicoCorrecao()
         id_resposta = kwargs.get('id_resposta', '')
-        #if request.user.is_authenticated and request.user.aluno:
-        id_aluno = 1
+        ### Recuperação do aluno logado
+        id_aluno = request.user.aluno.id
         nota = request.POST.get('nota','')
         comentario = request.POST.get('comentario', '')
         id_aval = srv.salvar_correcao(id_resposta, id_aluno, nota, comentario)
@@ -26,6 +45,7 @@ class AvaliaRespostaView(View):
 
 ## Nova Avaliação View
 ##############################
+@method_decorator(user_passes_test(eh_professor), name='dispatch')
 class NovaAvaliacaoView(View):
     def get(self, request, *args, **kwargs):
         srv = ServicoTurma()
@@ -54,6 +74,7 @@ class NovaAvaliacaoView(View):
 
 ## Lister Cursos View
 #############################
+@method_decorator(user_passes_test(eh_aluno_ou_professor), name='dispatch')
 class ListarCursosView(View):
     # Listar todas as turmas de todas as disciplinas de todos os cursos
     def get(self, request, *args, **kwargs):
@@ -64,6 +85,7 @@ class ListarCursosView(View):
 
 ## Avaliação View
 ##########################
+@method_decorator(user_passes_test(eh_aluno_ou_professor), name='dispatch')
 class AvaliacaoView(View):
     def get(self, request, *args, **kwargs):
         srv = ServicoAvaliacao()

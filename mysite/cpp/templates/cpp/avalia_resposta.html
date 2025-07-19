@@ -1,31 +1,24 @@
+{% extends "cpp/base.html" %}
 
-<html>
-    <head>
-        <title>App CPP</title>
-    </head>
-    <body>
-        <h1>Aplicação CorreçãoPorPar</h1>
-        <h2>Avaliação da Resposta de um Aluno</h2>
-        {% if user.is_authenticated %}
-            <h3>Bem vindo, usuário {{ user.username }}</h3>
-        {% endif %}
-        <p>
-            <u>Diagrama submetido por um colega</u>:<br/>
-            <img src="{{ resposta.diagrama.url }}" alt="diagrama"/>
-        </p>
-        <p>
-            <u>Observações</u>: {{ resposta.observacao }}
-        </p>
-        <hr/>
-        <form method="post" action="{% url 'cpp:avalia' resposta.id %}">
-            {% csrf_token %}
-            <h3>Registre a sua avaliação:</h3>
-            <p>Qual a sua nota para o diagrama (0-100):
-            <input type="number" name="nota" required/></p>
-            <p>Comentários:<br/>
-            <textarea name="comentario" cols="60">Informe aqui os motivos para a nota atribuída...
-            </textarea></p>
-            <p><input type="submit" value="Registrar a Avaliação"/></p>
-        </form>
-    </body>
-</html>
+{% block titulo %}Avaliação da Resposta de um Aluno{% endblock %}
+
+{% block principal %}
+    <p>
+        <u>Diagrama submetido por um colega</u>:<br/>
+        <img src="{{ resposta.diagrama.url }}" alt="diagrama"/>
+    </p>
+    <p>
+        <u>Observações</u>: {{ resposta.observacao }}
+    </p>
+    <hr/>
+    <form method="post" action="{% url 'cpp:avalia' resposta.id %}">
+        {% csrf_token %}
+        <h3>Registre a sua avaliação:</h3>
+        <p>Qual a sua nota para o diagrama (0-100):
+        <input type="number" name="nota" required/></p>
+        <p>Comentários:<br/>
+        <textarea name="comentario" cols="60">Informe aqui os motivos para a nota atribuída...
+        </textarea></p>
+        <p><input type="submit" value="Registrar a Avaliação"/></p>
+    </form>
+{% endblock %}

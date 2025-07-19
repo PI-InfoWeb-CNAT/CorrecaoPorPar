@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>App CPP</title>
+    </head>
+    <body>
+        <h1>Aplicação CorreçãoPorPar</h1>
+        <h2>Login de Usuário (aluno ou professor)</h2>
+        {% if form.errors %}
+            <p><b>Login ou senha fornecídos são inválidos. Tente novamente</b></p>
+        {% endif %}
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p>O seu usuário não tem acesso a essa página específica.
+                Para prosseguir realize a autenticação com um usuário que
+                possua a devida autorização.</p>
+            {% else %}
+                <p>Para acessar a página desejada é necessário realizar a autenticação
+                na aplicação, para tal forneça o seu login e senha.</p>
+            {% endif %}
+        {% endif %}
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Login: </td>
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <td>Senha: </td>
+                    <td>{{ form.password }}</td>
+                </tr>
+            </table>
+            <input type="submit" value="Efetuar login"/>
+            <input type="hidden" name="next" value="{{ next }}"/>
+        </form>
+    </body>
+</html>

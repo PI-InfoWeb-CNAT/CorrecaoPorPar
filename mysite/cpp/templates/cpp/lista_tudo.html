@@ -1,13 +1,14 @@
-<html>
-  <head>
-    <title>App CPP</title>
-    <!-- Recarga automática usando tag meta -->
-    <meta http-equiv="refresh" content="5"/>
-  </head>
-  <body>
-    <h1>Aplicação CorreçãoPorPar</h1>
-    <h2>Listagem Geral (AUXILIAR)</h2>
-    <ol>
+{% extends 'cpp/base.html' %}
+
+{% block head%}
+  <!-- Recarga automática usando tag meta -->
+  <meta http-equiv="refresh" content="10"/>
+{% endblock %}
+
+{% block titulo %}Listagem Geral (AUXILIAR){% endblock %}
+
+{% block principal %}
+  <ol>
     {% for curso in list_cursos %}
       <li>CURSO {{ forloop.counter }}: {{ curso.nome }}</li>
       {% if curso.disciplina_set %}
@@ -35,6 +36,5 @@
         </ol>
       {% endif %}
     {% endfor %}
-    </ol>
-  </body>
-</html>
+  </ol>
+{% endblock %}

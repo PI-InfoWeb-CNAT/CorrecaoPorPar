@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>App CPP</title>
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+        <h1>Aplicação CorreçãoPorPar</h1>
+        <h2>{% block titulo %}{% endblock %}</h2>
+        {% block principal %}
+        {% endblock %}
+        {% block menu %}
+            <a href="{% url 'cpp:index' %}">Home</a>
+            {% if user.is_authenticated %}
+                <form name="logout" method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    Usuário: {{ user.username }}
+                    {% if user.professor %}
+                        (professor)
+                    {% elif user.aluno %}
+                        (aluno)
+                    {% endif %}
+                    <input type="hidden" name="next" value="{% url 'cpp:index' %}"/>
+                    <input type="submit" value="Logout"/>
+                </form>
+            {% endif %}
+            {% block item_menu %}
+            {% endblock %}
+        {% endblock %}
+    </body>
+</html>
