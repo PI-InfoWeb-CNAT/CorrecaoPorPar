@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .services import ServicoResposta, ServicoCorrecao, ServicoTurma
+from .services import ServicoResposta, ServicoCorrecao, ServicoTurma, ServicoCurso
 from .models import Avaliacao
 
 ## Avalia Resposta View
@@ -51,3 +51,12 @@ class NovaAvaliacaoView(View):
                 if id_avaliacao:
                     return redirect('/avaliacao/{}/'.format(id_avaliacao))
 
+## Lister Cursos View
+#############################
+class ListarCursosView(View):
+    # Listar todas as turmas de todas as disciplinas de todos os cursos
+    def get(self, request, *args, **kwargs):
+        srv = ServicoCurso()
+        list_cursos = srv.get_cursos()
+        contexto = {'list_cursos': list_cursos}
+        return render(request, 'cpp/lista_tudo.html', contexto)

@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>App CPP</title>
+    <!-- Recarga automática usando tag meta -->
+    <meta http-equiv="refresh" content="5"/>
+  </head>
+  <body>
+    <h1>Aplicação CorreçãoPorPar</h1>
+    <h2>Listagem Geral (AUXILIAR)</h2>
+    <ol>
+    {% for curso in list_cursos %}
+      <li>CURSO {{ forloop.counter }}: {{ curso.nome }}</li>
+      {% if curso.disciplina_set %}
+        <ol>
+        {% for disciplina in curso.disciplina_set.all %}
+          <li>DISCIPLINA {{ forloop.counter }}: {{ disciplina.nome }}</li>
+          {% if disciplina.turma_set %}
+            <ol>
+            {% for turma in disciplina.turma_set.all  %}
+              <li>TURMA {{ forloop.counter }}: {{ turma.nome }}</li>
+              {% if turma.avaliacao_set %}
+                <ol>
+                {% for aval in turma.avaliacao_set.all %}
+                  <li>
+                    AVALIAÇÃO {{ forloop.counter }}:
+                    <a href="{% url 'cpp:avalia' aval.id %}">{{ aval.titulo }}</a>
+                  </li>
+                {% endfor %}
+                </ol>
+              {% endif %}
+            {% endfor %}
+            </ol>
+          {% endif %}
+        {% endfor %}
+        </ol>
+      {% endif %}
+    {% endfor %}
+    </ol>
+  </body>
+</html>

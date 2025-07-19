@@ -11,4 +11,8 @@ urlpatterns = [
         'turma/<int:id_turma>/nova-avaliacao/',
         views.NovaAvaliacaoView.as_view(), name='nova-avaliacao'
     ),
+    path(
+        '', # INICIALMENTE a página inicial será a listagem geral 
+        views.ListarCursosView.as_view(), name='lista-tudo'
+    ),
 ]
