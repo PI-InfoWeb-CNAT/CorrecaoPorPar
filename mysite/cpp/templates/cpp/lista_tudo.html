@@ -23,7 +23,7 @@
                 {% for aval in turma.avaliacao_set.all %}
                   <li>
                     AVALIAÇÃO {{ forloop.counter }}:
-                    <a href="{% url 'cpp:avalia' aval.id %}">{{ aval.titulo }}</a>
+                    <a href="{% url 'cpp:avaliacao' aval.id %}">{{ aval.titulo }}</a>
                   </li>
                 {% endfor %}
                 </ol>

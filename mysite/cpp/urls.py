@@ -4,6 +4,10 @@ from . import views
 app_name = 'cpp'
 urlpatterns = [
     path(
+        'avaliacao/<int:id>/',
+        views.AvaliacaoView.as_view(), name='avaliacao'
+    ),
+    path(
         'resposta/<int:id_resposta>/avalia/', 
         views.AvaliaRespostaView.as_view(), name='avalia'
     ),

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .services import ServicoResposta, ServicoCorrecao, ServicoTurma, ServicoCurso
+from .services import ServicoResposta, ServicoCorrecao, ServicoTurma
+from .services import ServicoCurso, ServicoAvaliacao
 from .models import Avaliacao
 
 ## Avalia Resposta View
@@ -60,3 +61,13 @@ class ListarCursosView(View):
         list_cursos = srv.get_cursos()
         contexto = {'list_cursos': list_cursos}
         return render(request, 'cpp/lista_tudo.html', contexto)
+
+## Avaliação View
+##########################
+class AvaliacaoView(View):
+    def get(self, request, *args, **kwargs):
+        srv = ServicoAvaliacao()
+        id_aval = kwargs.get('id','')
+        avaliacao = srv.get_avaliacao(id_aval)
+        contexto = {'avaliacao': avaliacao}
+        return render(request, 'cpp/avaliacao.html', contexto)

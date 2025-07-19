@@ -45,3 +45,10 @@ class ServicoTurma():
 class ServicoCurso():
     def get_cursos(self):
         return Curso.objects.all()
+    
+
+## Serviço Avaliação
+#########################
+class ServicoAvaliacao():
+    def get_avaliacao(self, id_avaliacao):
+        return Avaliacao.objects.get(pk = id_avaliacao)

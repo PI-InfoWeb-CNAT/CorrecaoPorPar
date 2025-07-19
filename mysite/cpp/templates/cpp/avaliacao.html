@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>App CPP</title>
+    <!-- Recarga automática usando tag meta -->
+    <meta http-equiv="refresh" content="5"/>
+  </head>
+  <body>
+    <h1>Aplicação CorreçãoPorPar</h1>
+    <h2>Avaliação #{{ avaliacao.id }} (INICIAL)</h2>
+    <p><u>Disciplina</u>: {{ avaliacao.turma.disciplina.nome }}</p>
+    <p><u>Turma</u>: {{ avaliacao.turma.nome }}, &nbsp;&nbsp;
+    <u>Professor</u>: {{ avaliacao.turma.professor.user.username }}</p>
+    <p><u>Data</u>: {{ avaliacao.data }}, &nbsp;&nbsp;
+        <u>Nota Máxima</u>: {{ avaliacao.nota }}</p>
+    <p><fieldset><legend>Enunciado</legend>{{ avaliacao.enunciado }}</fieldset></p>
+    <hr/>
+    <h3>Visão do Professor</h3>
+      {% if avaliacao.estagio == 1 %}
+        <form>
+          <input type="hidden" name="novo_estagio" value="2">
+          <input type="submit" value="Abrir a janela de SUBMISSÃO" />
+        </form>
+      {% elif avaliacao.estagio == 2 %}
+        <form>
+          <input type="hidden" name="novo_estagio" value="3">
+          <input type="submit" value="Finalizar submissão e abrir a janela de CORREÇÃO" />
+        </form>
+      {% elif avaliacao.estagio == 3 %}
+      <form>
+          <input type="hidden" name="novo_estagio" value="4">
+          <input type="submit" value="Finalizar a janela de CORREÇÃO" />
+        </form>
+      {% elif avaliacao.estagio == 4 %}
+        <h3>Avaliação Finalizada</h3>
+      {% endif %}
+    <hr/>
+    <h3>Visão do Aluno</h3>
+      {% if avaliacao.estagio == 1 %}
+        Aguarde a abertura da janela de SUBMISSÃO...
+      {% elif avaliacao.estagio == 2 %}
+        LINK para submeter resposta...
+      {% elif avaliacao.estagio == 3 and avaliacao.correcao == 1 %}
+        Aguarde a correção do professor...
+      {% elif avaliacao.estagio == 3 and avaliacao.correcao == 2 %}
+        LINK para realizar uma correção
+      {% elif avaliacao.estagio == 4 %}
+        <h3>Avaliação Finalizada</h3>
+      {% endif %}
+  </body>
+</html>
