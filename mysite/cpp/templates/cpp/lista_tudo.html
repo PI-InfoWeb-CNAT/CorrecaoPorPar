@@ -27,6 +27,11 @@
                     <a href="{% url 'cpp:avaliacao' aval.id %}">{{ aval.titulo }}</a>
                   </li>
                 {% endfor %}
+                {% if user.professor and turma.professor == user.professor %}
+                  <li>
+                    <a href="{% url 'cpp:criar-avaliacao' turma.id %}">(+) Nova Avaliação</a>
+                  </li>
+                {% endif %}
                 </ol>
               {% endif %}
             {% endfor %}

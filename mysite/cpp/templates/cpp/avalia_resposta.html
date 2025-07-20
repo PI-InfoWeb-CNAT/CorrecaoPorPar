@@ -11,7 +11,7 @@
         <u>Observações</u>: {{ resposta.observacao }}
     </p>
     <hr/>
-    <form method="post" action="{% url 'cpp:avalia' resposta.id %}">
+    <form method="post" action="{% url 'cpp:avaliar' resposta.id %}">
         {% csrf_token %}
         <h3>Registre a sua avaliação:</h3>
         <p>Qual a sua nota para o diagrama (0-100):

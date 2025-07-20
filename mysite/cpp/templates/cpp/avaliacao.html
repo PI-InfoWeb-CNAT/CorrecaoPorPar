@@ -17,22 +17,26 @@
   <hr/>
   {% if user.professor %}
     {####### Visão do Professor ########}
-    {% if avaliacao.estagio == 1 %} {# Avaliação CRIADA #}
+    {####### Avaliação CRIADA #######}
+    {% if avaliacao.estagio == 1 and user.professor == avaliacao.turma.professor %} 
       <form>
         <input type="hidden" name="novo_estagio" value="2">
         <input type="submit" value="Abrir a janela de SUBMISSÃO" />
       </form>
-    {% elif avaliacao.estagio == 2 %} {# Avaliação EM SUBMISSÃO #}
+    {####### Avaliação EM SUBMISSÃO #######}
+    {% elif avaliacao.estagio == 2 and user.professor == avaliacao.turma.professor %} 
       <form>
         <input type="hidden" name="novo_estagio" value="3">
         <input type="submit" value="Finalizar submissão e abrir a janela de CORREÇÃO" />
       </form>
-    {% elif avaliacao.estagio == 3 %} {# Avaliação EM CORREÇÃO #}
+    {####### Avaliação EM CORREÇÃO #######}
+    {% elif avaliacao.estagio == 3 and user.professor == avaliacao.turma.professor %} 
       <form>
         <input type="hidden" name="novo_estagio" value="4">
         <input type="submit" value="Finalizar a janela de CORREÇÃO" />
       </form>
-    {% elif avaliacao.estagio == 4 %} {# Avaliação FINALIZADA #}
+    {####### Avaliação FINALIZADA #######}  
+    {% elif avaliacao.estagio == 4 and user.professor == avaliacao.turma.professor %}
       <h3>Avaliação Finalizada</h3>
     {% endif %}
   {% elif user.aluno %}

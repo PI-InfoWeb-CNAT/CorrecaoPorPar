@@ -5,7 +5,7 @@
 
 {% block principal %}
     <hr/>
-    <form method="post" action="{% url 'cpp:nova-avaliacao' turma.id %}">
+    <form method="post" action="{% url 'cpp:criar-avaliacao' turma.id %}">
         {% csrf_token %}
         <p><u>Título</u>: <input type="text" name="titulo" size="54"/></p>
         <p><u>Enunciado</u>:<br/>
