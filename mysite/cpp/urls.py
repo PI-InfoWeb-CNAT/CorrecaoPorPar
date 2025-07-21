@@ -8,4 +8,8 @@ urlpatterns = [
         views.AvaliarRespostaView.as_view(),
         name = 'avaliar'
     ),
+    path(
+        'turma/<int:id_turma>/nova-avaliacao/',
+        views.NovaAvaliacaoView.as_view(), name='nova-avaliacao'
+    ),
 ]
