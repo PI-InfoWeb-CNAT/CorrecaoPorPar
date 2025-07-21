@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>App CPP</title>
+    </head>
+    <body>
+        <h1>Aplicação CorreçãoPorPar</h1>
+        <h2>Criação de uma Nova Avaliação para a turma {{ turma.nome }}</h2>
+        <hr/>
+        <form method="post" action="{% url 'cpp:nova-avaliacao' turma.id %}">
+            {% csrf_token %}
+            <p><u>Título</u>: <input type="text" name="titulo" size="54"/></p>
+            <p><u>Enunciado</u>:<br/>
+            <textarea cols="60" rows="3" name="enunciado"></textarea></p>
+            <p><u>Nota (máxima, de 0 a 100)</u>: <input type="number" name="nota"/></p>
+            <p><u>Tipo de correção</u>:
+            <select name="correcao" id="tipo_correcao">
+                {% for tipo in tipos %}
+                <option value="{{ tipo.0 }}">{{ tipo.1 }}</option>
+                {% endfor %}
+            </select>
+            </p>
+            <input type="submit" value="Cadastrar a Avaliação"/>
+        </form>
+    </body>
+</html>
