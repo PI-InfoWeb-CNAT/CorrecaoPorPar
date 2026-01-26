@@ -1,5 +1,5 @@
 from django.utils import timezone
-from .models import Resposta, CorrecaoPorPar, Turma, Avaliacao
+from .models import Resposta, CorrecaoPorPar, Turma, Avaliacao, Curso
 
 ## Serviço Resposta
 ########################
@@ -39,3 +39,16 @@ class ServicoTurma():
         )
         aval.save()
         return aval.id
+    
+## Serviço Curso
+#####################
+class ServicoCurso():
+    def get_cursos(self):
+        return Curso.objects.all()
+    
+
+## Serviço Avaliação
+#########################
+class ServicoAvaliacao():
+    def get_avaliacao(self, id_avaliacao):
+        return Avaliacao.objects.get(pk = id_avaliacao)

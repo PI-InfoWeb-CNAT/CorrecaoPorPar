@@ -1,0 +1,56 @@
+{% extends "cpp/base.html" %}
+
+{% block head%}
+  <!-- Recarga automática usando tag meta -->
+  <meta http-equiv="refresh" content="5"/>
+{% endblock %}
+
+{% block titulo %}Avaliação: {{ avaliacao.titulo }}{% endblock titulo %}
+
+{% block principal %}
+  <p><u>Disciplina</u>: {{ avaliacao.turma.disciplina.nome }}</p>
+  <p><u>Turma</u>: {{ avaliacao.turma.nome }}, &nbsp;&nbsp;
+  <u>Professor</u>: {{ avaliacao.turma.professor.user.username }}</p>
+  <p><u>Data</u>: {{ avaliacao.data }}, &nbsp;&nbsp;
+  <u>Nota Máxima</u>: {{ avaliacao.nota }}</p>
+  <p><fieldset><legend>Enunciado</legend>{{ avaliacao.enunciado }}</fieldset></p>
+  <hr/>
+  {% if user.professor %}
+    {####### Visão do Professor ########}
+    {####### Avaliação CRIADA #######}
+    {% if avaliacao.estagio == 1 and user.professor == avaliacao.turma.professor %} 
+      <form>
+        <input type="hidden" name="novo_estagio" value="2">
+        <input type="submit" value="Abrir a janela de SUBMISSÃO" />
+      </form>
+    {####### Avaliação EM SUBMISSÃO #######}
+    {% elif avaliacao.estagio == 2 and user.professor == avaliacao.turma.professor %} 
+      <form>
+        <input type="hidden" name="novo_estagio" value="3">
+        <input type="submit" value="Finalizar submissão e abrir a janela de CORREÇÃO" />
+      </form>
+    {####### Avaliação EM CORREÇÃO #######}
+    {% elif avaliacao.estagio == 3 and user.professor == avaliacao.turma.professor %} 
+      <form>
+        <input type="hidden" name="novo_estagio" value="4">
+        <input type="submit" value="Finalizar a janela de CORREÇÃO" />
+      </form>
+    {####### Avaliação FINALIZADA #######}  
+    {% elif avaliacao.estagio == 4 and user.professor == avaliacao.turma.professor %}
+      <h3>Avaliação Finalizada</h3>
+    {% endif %}
+  {% elif user.aluno %}
+    {####### Visão do Aluno #######}
+    {% if avaliacao.estagio == 1 %} {# Avaliação CRIADA #}
+      <p>Aguarde a abertura da janela de SUBMISSÃO...</p>
+    {% elif avaliacao.estagio == 2 %} {# Avaliação EM SUBMISSÃO #}
+      <p>LINK para submeter resposta...</p>
+    {% elif avaliacao.estagio == 3 and avaliacao.correcao == 1 %} {# Avaliação EM CORREÇÃO #}
+      <p>Aguarde a correção do professor...</p>
+    {% elif avaliacao.estagio == 3 and avaliacao.correcao == 2 %} {# Avaliação EM CORREÇÃO #}
+      <p>LINK para realizar uma correção</p>
+    {% elif avaliacao.estagio == 4 %} {# Avaliação FINALIZADA #}
+      <h3>Avaliação Finalizada</h3>
+    {% endif %}
+  {% endif %}
+{% endblock principal %}
